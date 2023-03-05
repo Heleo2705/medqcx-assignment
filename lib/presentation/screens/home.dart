@@ -7,6 +7,7 @@ import 'package:medqcx/data/models/device_response_model/device_model.dart';
 import 'package:medqcx/data/repo/data_repo.dart';
 import 'package:medqcx/router/router.dart';
 import 'package:medqcx/router/router.gr.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../data/models/failure.dart';
 import '../components/accent_button.dart';
@@ -25,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final repo = DataRepo();
   Future<dz.Either<Failure, List<DeviceModel>>>? getDeviceModels;
+  RefreshController controller=RefreshController(initialRefresh: false);
   @override
   void initState() {
     getDeviceModels = repo.getDeviceInfo();
@@ -66,40 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (snapshot.data?.isRight() ?? false) {
                   final list = snapshot.data
                       ?.getOrElse(() => throw UnimplementedError());
-                  return ListView.builder(
-                    itemCount: list?.length,
-                    itemBuilder: (context, index) {
-                      return ProductTile(
-                        model: list![index],
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: PrimaryButton(
-                                child: Text(
-                                  "Raise Complaint",
-                                  style: TextStyleConstants.text12(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: AccentButton(
-                                onTap: () {
-                                  appRouter.push(DeviceDetailScreenRoute(
-                                      model: list![index]));
-                                },
-                                label: "View Details",
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
+                  return _loadedScaffold(list);
                 } else {
                   return Center(
                     child: Text("Some Error Occurred"),
@@ -113,6 +82,52 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
       ),
       bottomNavigationBar: BottomBar(index: 1),
+    );
+  }
+
+   _loadedScaffold(List<DeviceModel>? list) {
+    return SmartRefresher(
+      enablePullDown: true,
+      header: WaterDropHeader(),
+      controller: controller,
+      onRefresh: (){
+        getDeviceModels=repo.getDeviceInfo();
+        controller.refreshCompleted();
+      },
+      child: ListView.builder(
+        itemCount: list?.length,
+        itemBuilder: (context, index) {
+          return ProductTile(
+            model: list![index],
+            child: Row(
+              children: [
+                Expanded(
+                  child: PrimaryButton(
+                    child: Text(
+                      "Raise Complaint",
+                      style: TextStyleConstants.text12(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: AccentButton(
+                    onTap: () {
+                      appRouter.push(DeviceDetailScreenRoute(
+                          model: list![index]));
+                    },
+                    label: "View Details",
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
