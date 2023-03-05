@@ -1,0 +1,44 @@
+{
+  "list": [
+    {
+      "device_model": "v1",
+      "id": "9c72fe0a-817c-465e-8111-8d637fff5d38",
+      "manufacturer": "philips",
+      "name": "CT machine",
+      "serial_number": "134214",
+      "health": 6,
+      "status": "working",
+      "image_url": "https://marketing.webassets.siemens-healthineers.com/2a94d46f344cf4fc/ba997d636633/v/77a8ec27432e/siemens-healthineers_CT_SOMATOM_X.ceed.png"
+    },
+    {
+      "device_model": "v2",
+      "id": "9c72fe0a-817c-465e-8111-8d637fff5d38",
+      "manufacturer": "tata",
+      "name": "patient monitor",
+      "serial_number": "132314",
+      "health": 4,
+      "status": "stand-by",
+      "image_url": "https://marketing.webassets.siemens-healthineers.com/2a94d46f344cf4fc/ba997d636633/v/77a8ec27432e/siemens-healthineers_CT_SOMATOM_X.ceed.png"
+    },
+    {
+      "device_model": "v1",
+      "id": "9c72fe0a-817c-465e-8111-8d637fff5d38",
+      "manufacturer": "philips",
+      "name": "defabricator",
+      "serial_number": "112324",
+      "health": 0,
+      "status": "in-service",
+      "image_url": "https://marketing.webassets.siemens-healthineers.com/2a94d46f344cf4fc/ba997d636633/v/77a8ec27432e/siemens-healthineers_CT_SOMATOM_X.ceed.png"
+    },
+    {
+      "device_model": "v1",
+      "id": "9c72fe0a-817c-465e-8111-8d637fff5d38",
+      "manufacturer": "GE",
+      "name": "x-ray",
+      "serial_number": "134214",
+      "health": 6,
+      "status": "working",
+      "image_url": "https://marketing.webassets.siemens-healthineers.com/2a94d46f344cf4fc/ba997d636633/v/77a8ec27432e/siemens-healthineers_CT_SOMATOM_X.ceed.png"
+    }
+  ]
+}
