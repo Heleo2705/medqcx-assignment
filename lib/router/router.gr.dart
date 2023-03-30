@@ -11,139 +11,99 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i6;
+import 'dart:io' as _i5;
 
-import '../data/models/device_response_model/device_model.dart' as _i7;
-import '../presentation/screens/device_detail.dart' as _i4;
-import '../presentation/screens/home.dart' as _i1;
-import '../presentation/screens/profile.dart' as _i3;
-import '../presentation/screens/schedule.dart' as _i2;
+import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:flutter/material.dart' as _i4;
 
-class AppRouter extends _i5.RootStackRouter {
-  AppRouter([_i6.GlobalKey<_i6.NavigatorState>? navigatorKey])
+import '../presentation/camera_screen.dart' as _i2;
+import '../presentation/img_preview.dart' as _i1;
+
+class AppRouter extends _i3.RootStackRouter {
+  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i5.PageFactory> pagesMap = {
-    HomeScreenRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
+  final Map<String, _i3.PageFactory> pagesMap = {
+    ImgPreviewRoute.name: (routeData) {
+      final args = routeData.argsAs<ImgPreviewRouteArgs>();
+      return _i3.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i1.HomeScreen(),
-      );
-    },
-    ScheduleScreenRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i2.ScheduleScreen(),
-      );
-    },
-    ProfileScreenRoute.name: (routeData) {
-      return _i5.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i3.ProfileScreen(),
-      );
-    },
-    DeviceDetailScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<DeviceDetailScreenRouteArgs>();
-      return _i5.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: _i4.DeviceDetailScreen(
+        child: _i1.ImgPreview(
           key: args.key,
-          model: args.model,
+          title: args.title,
+          file: args.file,
         ),
+      );
+    },
+    CameraScreenRoute.name: (routeData) {
+      return _i3.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i2.CameraScreen(),
       );
     },
   };
 
   @override
-  List<_i5.RouteConfig> get routes => [
-        _i5.RouteConfig(
-          HomeScreenRoute.name,
+  List<_i3.RouteConfig> get routes => [
+        _i3.RouteConfig(
+          ImgPreviewRoute.name,
+          path: '/img-preview',
+        ),
+        _i3.RouteConfig(
+          CameraScreenRoute.name,
           path: '/',
-        ),
-        _i5.RouteConfig(
-          ScheduleScreenRoute.name,
-          path: '/schedule-screen',
-        ),
-        _i5.RouteConfig(
-          ProfileScreenRoute.name,
-          path: '/profile-screen',
-        ),
-        _i5.RouteConfig(
-          DeviceDetailScreenRoute.name,
-          path: '/device-detail-screen',
         ),
       ];
 }
 
 /// generated route for
-/// [_i1.HomeScreen]
-class HomeScreenRoute extends _i5.PageRouteInfo<void> {
-  const HomeScreenRoute()
-      : super(
-          HomeScreenRoute.name,
-          path: '/',
-        );
-
-  static const String name = 'HomeScreenRoute';
-}
-
-/// generated route for
-/// [_i2.ScheduleScreen]
-class ScheduleScreenRoute extends _i5.PageRouteInfo<void> {
-  const ScheduleScreenRoute()
-      : super(
-          ScheduleScreenRoute.name,
-          path: '/schedule-screen',
-        );
-
-  static const String name = 'ScheduleScreenRoute';
-}
-
-/// generated route for
-/// [_i3.ProfileScreen]
-class ProfileScreenRoute extends _i5.PageRouteInfo<void> {
-  const ProfileScreenRoute()
-      : super(
-          ProfileScreenRoute.name,
-          path: '/profile-screen',
-        );
-
-  static const String name = 'ProfileScreenRoute';
-}
-
-/// generated route for
-/// [_i4.DeviceDetailScreen]
-class DeviceDetailScreenRoute
-    extends _i5.PageRouteInfo<DeviceDetailScreenRouteArgs> {
-  DeviceDetailScreenRoute({
-    _i6.Key? key,
-    required _i7.DeviceModel model,
+/// [_i1.ImgPreview]
+class ImgPreviewRoute extends _i3.PageRouteInfo<ImgPreviewRouteArgs> {
+  ImgPreviewRoute({
+    _i4.Key? key,
+    required String title,
+    required _i5.File file,
   }) : super(
-          DeviceDetailScreenRoute.name,
-          path: '/device-detail-screen',
-          args: DeviceDetailScreenRouteArgs(
+          ImgPreviewRoute.name,
+          path: '/img-preview',
+          args: ImgPreviewRouteArgs(
             key: key,
-            model: model,
+            title: title,
+            file: file,
           ),
         );
 
-  static const String name = 'DeviceDetailScreenRoute';
+  static const String name = 'ImgPreviewRoute';
 }
 
-class DeviceDetailScreenRouteArgs {
-  const DeviceDetailScreenRouteArgs({
+class ImgPreviewRouteArgs {
+  const ImgPreviewRouteArgs({
     this.key,
-    required this.model,
+    required this.title,
+    required this.file,
   });
 
-  final _i6.Key? key;
+  final _i4.Key? key;
 
-  final _i7.DeviceModel model;
+  final String title;
+
+  final _i5.File file;
 
   @override
   String toString() {
-    return 'DeviceDetailScreenRouteArgs{key: $key, model: $model}';
+    return 'ImgPreviewRouteArgs{key: $key, title: $title, file: $file}';
   }
+}
+
+/// generated route for
+/// [_i2.CameraScreen]
+class CameraScreenRoute extends _i3.PageRouteInfo<void> {
+  const CameraScreenRoute()
+      : super(
+          CameraScreenRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'CameraScreenRoute';
 }

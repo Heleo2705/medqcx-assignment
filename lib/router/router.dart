@@ -1,22 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:medqcx/presentation/screens/device_detail.dart';
 import 'package:medqcx/router/router.gr.dart';
 
-import '../presentation/screens/home.dart';
-import '../presentation/screens/profile.dart';
-import '../presentation/screens/schedule.dart';
+import '../presentation/camera_screen.dart';
+import '../presentation/img_preview.dart';
 
-// part 'router.gr.dart';
+@MaterialAutoRouter(routes: <AutoRoute>[
+  MaterialRoute(page: ImgPreview),
+  MaterialRoute(page: CameraScreen, initial: true),
+])
+class $AppRouter {}
 
 final appRouter = AppRouter();
-
-@MaterialAutoRouter(
-  replaceInRouteName: 'Screen',
-  routes: [
-    MaterialRoute(page: HomeScreen, initial: true),
-    MaterialRoute(page: ScheduleScreen),
-    MaterialRoute(page: ProfileScreen),
-    MaterialRoute(page: DeviceDetailScreen),
-  ],
-)
-class $AppRouter {}
